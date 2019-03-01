@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {polyfill} from 'react-lifecycles-compat';
+import { polyfill } from "react-lifecycles-compat";
 
 import { Text, View, LayoutAnimation, TouchableOpacity } from "react-native";
 import styles from "./Calendar.style.js";
@@ -32,7 +32,6 @@ class CalendarDay extends Component {
     highlightDateNumberStyle: PropTypes.any,
     disabledDateNameStyle: PropTypes.any,
     disabledDateNumberStyle: PropTypes.any,
-    markedDatesStyle: PropTypes.object,
     disabledDateOpacity: PropTypes.number,
     styleWeekend: PropTypes.bool,
     customStyle: PropTypes.object,
@@ -131,36 +130,51 @@ class CalendarDay extends Component {
     }
     const marking = this.props.marking || {};
     const baseDotStyle = [styles.dot, styles.visibleDot];
-    const markedDatesStyle = this.props.markedDatesStyle || {};
     let validDots = <View style={[styles.dot]} />; // default empty view for no dots case
 
-    if (marking.dots && Array.isArray(marking.dots) && marking.dots.length > 0) {
+    if (
+      marking.dots &&
+      Array.isArray(marking.dots) &&
+      marking.dots.length > 0
+    ) {
       // Filter out dots so that we we process only those items which have key and color property
-      validDots = marking.dots.filter(d => (d && d.color)).map((dot, index) => {
-        return (
-          <View
-            key={dot.key ? dot.key : index}
-            style={[
-              baseDotStyle,
-              { backgroundColor: marking.selected && dot.selectedDotColor ? dot.selectedDotColor : dot.color },
-              markedDatesStyle
-            ]}
-          />
-        );
-      });
+      validDots = marking.dots
+        .filter(d => d && d.color)
+        .map((dot, index) => {
+          return (
+            <View
+              key={dot.key ? dot.key : index}
+              style={[
+                baseDotStyle,
+                {
+                  backgroundColor:
+                    marking.selected && dot.selectedDotColor
+                      ? dot.selectedDotColor
+                      : dot.color
+                }
+              ]}
+            />
+          );
+        });
     }
 
-    return (
-      <View style={styles.dotsContainer}>
-        { validDots }
-      </View>
-    );
+    return <View style={styles.dotsContainer}>{validDots}</View>;
   }
 
   render() {
     // Defaults for disabled state
-    let dateNameStyle = [styles.dateName, this.props.enabled ? this.props.dateNameStyle : this.props.disabledDateNameStyle];
-    let dateNumberStyle = [styles.dateNumber, this.props.enabled ? this.props.dateNumberStyle : this.props.disabledDateNumberStyle];
+    let dateNameStyle = [
+      styles.dateName,
+      this.props.enabled
+        ? this.props.dateNameStyle
+        : this.props.disabledDateNameStyle
+    ];
+    let dateNumberStyle = [
+      styles.dateNumber,
+      this.props.enabled
+        ? this.props.dateNumberStyle
+        : this.props.disabledDateNumberStyle
+    ];
     let dateViewStyle = this.props.enabled
       ? [{ backgroundColor: "transparent" }]
       : [{ opacity: this.props.disabledDateOpacity }];
@@ -178,7 +192,9 @@ class CalendarDay extends Component {
       //If it is border, the user has to input color for border animation
       switch (this.props.daySelectionAnimation.type) {
         case "background":
-          dateViewStyle.push({ backgroundColor: this.props.daySelectionAnimation.highlightColor });
+          dateViewStyle.push({
+            backgroundColor: this.props.daySelectionAnimation.highlightColor
+          });
           break;
         case "border":
           dateViewStyle.push({
@@ -223,19 +239,11 @@ class CalendarDay extends Component {
       padding: this.state.containerPadding
     };
 
-
     return (
       <TouchableOpacity
         onPress={this.props.onDateSelected.bind(this, this.props.date)}
       >
-        <View
-          key={this.props.date}
-          style={[
-            styles.dateContainer,
-            responsiveDateContainerStyle,
-            dateViewStyle
-          ]}
-        >
+        <View key={this.props.date} style={[styles.dateContainer]}>
           {this.props.showDayName && (
             <Text
               style={[dateNameStyle, { fontSize: this.state.dateNameFontSize }]}
@@ -245,17 +253,15 @@ class CalendarDay extends Component {
             </Text>
           )}
           {this.props.showDayNumber && (
-            <View>
+            <View style={[styles.selectWrapper, dateViewStyle]}>
               <Text
-                style={[
-                    { fontSize: this.state.dateNumberFontSize },
-                    dateNumberStyle
-                ]}
+                style={[dateNumberStyle]}
                 allowFontScaling={this.props.allowDayTextScaling}
               >
                 {this.props.date.date()}
               </Text>
-              { this.renderDots() }
+
+              {this.renderDots()}
             </View>
           )}
         </View>

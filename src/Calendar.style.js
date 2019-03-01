@@ -56,24 +56,31 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center"
   },
+  selectWrapper: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 5
+  },
   dot: {
     width: 6,
     height: 6,
-    marginTop: 1,
     borderRadius: 5,
     opacity: 0
   },
 
   // CALENDAR DOTS
   dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center'
+    flexDirection: "row",
+    justifyContent: "center"
   },
   visibleDot: {
     opacity: 1,
-    backgroundColor: 'blue'
+    backgroundColor: "blue"
   },
   selectedDot: {
-    backgroundColor: 'blue'
-  },
+    backgroundColor: "blue"
+  }
 });
