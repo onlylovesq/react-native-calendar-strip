@@ -241,6 +241,7 @@ class CalendarDay extends Component {
 
     return (
       <TouchableOpacity
+        activeOpacity={1}
         onPress={this.props.onDateSelected.bind(this, this.props.date)}
       >
         <View key={this.props.date} style={[styles.dateContainer]}>
