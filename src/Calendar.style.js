@@ -62,7 +62,6 @@ export default StyleSheet.create({
     borderRadius: 17,
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 5
   },
   dot: {
     width: 6,

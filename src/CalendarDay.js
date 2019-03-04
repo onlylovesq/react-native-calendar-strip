@@ -262,9 +262,10 @@ class CalendarDay extends Component {
                 {this.props.date.date()}
               </Text>
 
-              {this.renderDots()}
+              {/* {this.renderDots()} */}
             </View>
           )}
+          {this.props.showDayNumber && this.renderDots()}
         </View>
       </TouchableOpacity>
     );
