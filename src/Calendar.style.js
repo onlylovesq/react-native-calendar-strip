@@ -12,7 +12,8 @@ export default StyleSheet.create({
   datesStrip: {
     flexDirection: "row",
     flex: 1,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginTop: 10
   },
   calendarDates: {
     flex: 1,
@@ -61,7 +62,7 @@ export default StyleSheet.create({
     height: 34,
     borderRadius: 17,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   dot: {
     width: 6,
@@ -73,7 +74,8 @@ export default StyleSheet.create({
   // CALENDAR DOTS
   dotsContainer: {
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: 10
   },
   visibleDot: {
     opacity: 1,
